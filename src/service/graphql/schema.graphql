@@ -1,0 +1,44 @@
+schema {
+    query: Query
+}
+
+type Player {
+    id: ID
+    name: String
+}
+
+type Staff {
+    id: ID
+    name: String
+}
+
+type PlayerResult {
+    success: Boolean
+    errors: [String]
+    player: Player
+}
+
+type PlayersResult {
+    success: Boolean
+    errors: [String]
+    players: [Player]
+}
+
+type StaffMemberResult {
+    success: Boolean
+    errors: [String]
+    staff: Staff
+}
+
+type AllStaffResult {
+    success: Boolean
+    errors: [String]
+    staff: [Staff]
+}
+
+type Query {
+    getAllPlayers: PlayersResult!
+    getPlayer: PlayerResult!
+    getAllStaff: AllStaffResult!
+    getStaffMember: StaffMemberResult!
+}
