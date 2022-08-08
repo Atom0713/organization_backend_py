@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask
+from flask_cors import CORS
 
 
 def create_app(test_config=None):
@@ -10,6 +11,7 @@ def create_app(test_config=None):
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
     )
+    CORS(app)
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
@@ -23,10 +25,13 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
-
-    from .service import bp
-
-    app.register_blueprint(bp)
-
+    
+    from .service.common import bp as common
+    from .service.auth import bp as auth
+    from .service.user import bp as user
+    
+    app.register_blueprint(common)
+    app.register_blueprint(auth)
+    app.register_blueprint(user)
 
     return app
