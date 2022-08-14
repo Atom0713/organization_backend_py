@@ -11,7 +11,7 @@ def create_app(test_config=None):
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
     )
-    CORS(app)
+    CORS(app, origins=["http://localhost:3000"])
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
@@ -29,9 +29,11 @@ def create_app(test_config=None):
     from .service.common import bp as common
     from .service.auth import bp as auth
     from .service.user import bp as user
+    from.service.roles import ROLE
     
     app.register_blueprint(common)
     app.register_blueprint(auth)
     app.register_blueprint(user)
+    app.register_blueprint(ROLE)
 
     return app
