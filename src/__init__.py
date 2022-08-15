@@ -30,10 +30,12 @@ def create_app(test_config=None):
     from .service.auth import bp as auth
     from .service.user import bp as user
     from.service.roles import ROLE
+    from .service.events import EVENTS
     
     app.register_blueprint(common)
     app.register_blueprint(auth)
     app.register_blueprint(user)
     app.register_blueprint(ROLE)
+    app.register_blueprint(EVENTS)
 
     return app
