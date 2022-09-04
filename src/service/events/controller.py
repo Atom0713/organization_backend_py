@@ -35,3 +35,8 @@ def resolve_get_event(id):
                 "date": "20/20/1020",
                 "description": "Ride till we gotta go home."
             }
+
+def resolve_post_events():
+    return {
+        "status": "success"
+    }
