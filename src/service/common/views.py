@@ -1,7 +1,6 @@
-from flask import jsonify, Blueprint
+from flask import Blueprint, jsonify
 
-
-bp = Blueprint('common', __name__)
+bp = Blueprint("common", __name__)
 
 
 @bp.route("/", methods=["GET"])

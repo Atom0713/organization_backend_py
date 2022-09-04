@@ -1,4 +1,5 @@
 from flask import Blueprint
+
 from .controller import resolve_get_user_permissions
 
 bp = Blueprint("role", __name__, url_prefix="/role")

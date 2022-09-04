@@ -1,8 +1,9 @@
-from flask import request, jsonify, Blueprint
-from .controller import resolve_get_users_by_role, resolve_add_user, resolve_get_all_user_roles
+from flask import Blueprint, jsonify, request
 
+from .controller import (resolve_add_user, resolve_get_all_user_roles,
+                         resolve_get_users_by_role)
 
-bp = Blueprint('user', __name__, url_prefix="/user")
+bp = Blueprint("user", __name__, url_prefix="/user")
 
 
 @bp.route("/<id>", methods=["GET"])
