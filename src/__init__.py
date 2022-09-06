@@ -31,11 +31,13 @@ def create_app(test_config=None):
     from .service.events import EVENTS
     from .service.roles import ROLE
     from .service.user import bp as user
+    from .service.attendance import attendance
 
     app.register_blueprint(common)
     app.register_blueprint(auth)
     app.register_blueprint(user)
     app.register_blueprint(ROLE)
     app.register_blueprint(EVENTS)
+    app.register_blueprint(attendance)
 
     return app

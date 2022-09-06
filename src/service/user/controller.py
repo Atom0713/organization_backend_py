@@ -29,6 +29,7 @@ def resolve_get_users_by_role(role_id):
         ],
         "3": [
             {
+                "id": 1,
                 "img": "assets/images/faces/face1.jpg",
                 "name": "Artem",
                 "height": "175",
@@ -37,6 +38,7 @@ def resolve_get_users_by_role(role_id):
                 "birth_date": "05/04/1996",
             },
             {
+                "id": 2,
                 "img": "assets/images/faces/face1.jpg",
                 "name": "Artem",
                 "height": "175",
@@ -45,6 +47,7 @@ def resolve_get_users_by_role(role_id):
                 "birth_date": "05/04/1996",
             },
             {
+                "id": 3,
                 "img": "assets/images/faces/face1.jpg",
                 "name": "Artem",
                 "height": "175",
@@ -53,6 +56,7 @@ def resolve_get_users_by_role(role_id):
                 "birth_date": "05/04/1996",
             },
             {
+                "id": 4,
                 "img": "assets/images/faces/face1.jpg",
                 "name": "Artem",
                 "height": "175",
@@ -61,6 +65,7 @@ def resolve_get_users_by_role(role_id):
                 "birth_date": "05/04/1996",
             },
             {
+                "id": 5,
                 "img": "assets/images/faces/face1.jpg",
                 "name": "Artem",
                 "height": "175",
@@ -69,6 +74,7 @@ def resolve_get_users_by_role(role_id):
                 "birth_date": "05/04/1996",
             },
             {
+                "id": 6,
                 "img": "assets/images/faces/face1.jpg",
                 "name": "Artem",
                 "height": "175",
