@@ -11,7 +11,7 @@ def create_app(test_config=None):
         SECRET_KEY="dev",
         DATABASE=os.path.join(app.instance_path, "flaskr.sqlite"),
     )
-    CORS(app, origins=[os.environ.get("CLIENT_URL", "http://localhost:3000")])
+    CORS(app, origins=os.environ.get("CLIENT_URL", ["http://localhost:3000"]))
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
