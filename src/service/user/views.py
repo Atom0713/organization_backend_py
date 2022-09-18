@@ -12,7 +12,7 @@ bp = Blueprint("user", __name__, url_prefix="/user")
 @bp.route("/<id>", methods=["GET"])
 def get_user_by_id(id):
 
-    return jsonify({"name": "Artem Sliusarenko"})
+    return jsonify({"name": "Artem Sliusarenko", "id": 1})
 
 
 @bp.route("/role/<role_id>/", methods=["GET"])
