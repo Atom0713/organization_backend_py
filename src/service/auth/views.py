@@ -1,9 +1,9 @@
 from flask import Blueprint, jsonify, request
 
-bp = Blueprint("auth", __name__)
+bp = Blueprint("auth", __name__, url_prefix="/login")
 
 
-@bp.route("/login", methods=["POST"])
+@bp.route("/", methods=["POST"])
 def graphql_server():
     data = request.get_json()
     print(data)
