@@ -37,6 +37,7 @@ def create_app(test_config=None):
     from .service.roles import ROLE
     from .service.user import bp as user
     from .service.attendance import attendance
+    from .service.comment import COMMENT
 
     app.register_blueprint(common)
     app.register_blueprint(auth)
@@ -44,5 +45,6 @@ def create_app(test_config=None):
     app.register_blueprint(ROLE)
     app.register_blueprint(EVENTS)
     app.register_blueprint(attendance)
+    app.register_blueprint(COMMENT)
 
     return app
