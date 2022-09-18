@@ -11,11 +11,7 @@ def create_app(test_config=None):
         SECRET_KEY="dev",
         DATABASE=os.path.join(app.instance_path, "flaskr.sqlite"),
     )
-    CORS(app, resource={
-        r"/*":{
-            "origins":"*"
-        }
-    })
+    CORS(app, resource={r"/*": {"origins": "*"}})
     # CORS(app, origins=os.environ.get("CLIENT_URL", ["http://localhost:3000", "https://antalya-vandals-dashboard.herokuapp.com/"]))
 
     if test_config is None:
@@ -31,13 +27,13 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    from .service.attendance import attendance
     from .service.auth import bp as auth
+    from .service.comment import COMMENT
     from .service.common import bp as common
     from .service.events import EVENTS
     from .service.roles import ROLE
     from .service.user import bp as user
-    from .service.attendance import attendance
-    from .service.comment import COMMENT
 
     app.register_blueprint(common)
     app.register_blueprint(auth)

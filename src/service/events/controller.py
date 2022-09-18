@@ -39,7 +39,4 @@ def resolve_get_event(id):
 
 
 def resolve_post_events():
-    return {
-        "status": "success",
-        "id": 5
-    }
+    return {"status": "success", "id": 5}
