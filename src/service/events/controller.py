@@ -40,3 +40,15 @@ def resolve_get_event(id):
 
 def resolve_post_events():
     return {"status": "success", "id": 5}
+
+
+def resolve_get_event_attendance(id):
+    return {
+        "id": id,
+        "expected": 100,
+        "attended": 50,
+    }
+
+
+def resolve_post_event_attendance(id):
+    return {"status": "success", "id": 5}

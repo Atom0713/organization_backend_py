@@ -27,7 +27,6 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    from .service.attendance import attendance
     from .service.auth import bp as auth
     from .service.comment import COMMENT
     from .service.common import bp as common
@@ -40,7 +39,6 @@ def create_app(test_config=None):
     app.register_blueprint(user)
     app.register_blueprint(ROLE)
     app.register_blueprint(EVENTS)
-    app.register_blueprint(attendance)
     app.register_blueprint(COMMENT)
 
     return app
