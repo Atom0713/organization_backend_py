@@ -1,8 +1,9 @@
 from flask import Blueprint, request
 
 from ..constants import HTTPRequestMethods
-from .controller import (resolve_get_event, resolve_get_event_attendance, resolve_post_event_attendance,
-                         resolve_get_events, resolve_post_events)
+from .controller import (resolve_get_event, resolve_get_event_attendance,
+                         resolve_get_events, resolve_post_event_attendance,
+                         resolve_post_events)
 
 bp = Blueprint("events", __name__, url_prefix="/event")
 
