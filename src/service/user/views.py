@@ -6,10 +6,10 @@ from .controller import (resolve_add_user, resolve_get_all_user_roles,
 bp = Blueprint("user", __name__, url_prefix="/user")
 
 
-@bp.route("/<id>", methods=["GET"])
-def get_user_by_id(id):
+@bp.route("/", methods=["GET"])
+def get_user_by_id():
 
-    return jsonify({"name": "Artem Sliusarenko", "id": 1})
+    return jsonify({"status": "ok", "data": {"name": "Artem Sliusarenko", "id": 1, "role": "Staff",  "date": '2022-09-09'}})
 
 
 @bp.route("/role/<role_id>/", methods=["GET"])
