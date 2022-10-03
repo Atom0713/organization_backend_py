@@ -1,11 +1,13 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, request
+
+from ..utils import handle_response
 
 bp = Blueprint("auth", __name__, url_prefix="/login")
 
 
 @bp.route("/", methods=["POST"])
-def graphql_server():
+@handle_response
+def handle_login():
     data = request.get_json()
-    print(data)
 
-    return jsonify({"token": "dkljfgweyofhiu3nnqr"})
+    return {"token": "dkljfgweyofhiu3nnqr"}

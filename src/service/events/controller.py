@@ -43,14 +43,14 @@ def resolve_get_event(id):
 
 def resolve_post_events():
     return {
-        "status": "success", 
+        "status": "success",
         "data": {
             "id": 5,
             "name": "Event 5",
             "description": "eat cock",
-            "date": '2022-09-09T19:00:00+00:00',
-            "location": "Up your ass!"
-        }
+            "date": "2022-09-09T19:00:00+00:00",
+            "location": "Up your ass!",
+        },
     }
 
 
