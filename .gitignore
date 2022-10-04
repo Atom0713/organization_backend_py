@@ -13,4 +13,4 @@ dist/
 build/
 *.egg-info/
 
-venv_organization_py_3_10_2
+venv_*
