@@ -1,13 +1,12 @@
 from flask import Blueprint, request
 
-from ..utils import handle_response
+from .token import encode_auth_token
 
 bp = Blueprint("auth", __name__, url_prefix="/login")
 
 
 @bp.route("/", methods=["POST"])
-@handle_response
 def handle_login():
-    data = request.get_json()
-
-    return {"token": "dkljfgweyofhiu3nnqr"}
+    # data = request.get_json()
+    user_id = 1
+    return {"token": encode_auth_token(user_id)}
