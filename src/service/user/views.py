@@ -12,13 +12,10 @@ bp = Blueprint("user", __name__, url_prefix="/user")
 def get_user_by_id():
 
     return {
-        "status": "ok",
-        "data": {
             "name": "Artem Sliusarenko",
             "id": 1,
             "role": "Staff",
             "date": "2022-09-09",
-        },
     }
 
 
