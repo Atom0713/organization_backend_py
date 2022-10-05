@@ -1,7 +1,7 @@
 import logging
 
 logging.basicConfig(
-    filename="log",
+    filename="error.log",
     level=logging.DEBUG,
     format=f"%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s",
 )
