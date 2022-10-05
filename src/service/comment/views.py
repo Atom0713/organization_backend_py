@@ -1,4 +1,5 @@
 from flask import Blueprint, request
+from flask_jwt_extended import jwt_required
 
 from src.service.constants import HTTPRequestMethods
 
@@ -9,6 +10,7 @@ bp = Blueprint("comment", __name__, url_prefix="/comment")
 
 
 @bp.route("/", methods=["GET", "POST"])
+@jwt_required()
 @handle_response
 def handle_comment():
     if request.method == HTTPRequestMethods.GET:

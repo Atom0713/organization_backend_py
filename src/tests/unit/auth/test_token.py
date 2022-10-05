@@ -1,6 +1,6 @@
-from src.service.auth.token import encode_auth_token, decode_auth_token
-
 import pytest
+
+from src.service.auth.token import decode_auth_token, encode_auth_token
 
 
 @pytest.mark.parametrize("user_id", [1])

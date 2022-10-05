@@ -95,7 +95,7 @@ def resolve_add_user():
 def resolve_get_all_user_roles():
     return {
         "user_roles": [
-        #     {"id": 1, "name": "Admin"}, # TODO internal use only
+            #     {"id": 1, "name": "Admin"}, # TODO internal use only
             {"id": 2, "name": "Staff"},
             {"id": 3, "name": "Player"},
         ]

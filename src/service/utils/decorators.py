@@ -1,8 +1,12 @@
+from .logger import logger
+
+
 def handle_response(func):
     def wrapper(*args, **kwargs):
         try:
             response = func(*args, **kwargs)
         except Exception as e:
+            logger.error(e)
             # TODO does message exist? USe custom global Exception
             return {"error": "Something went wrong!"}
         return {"status": "ok", "data": response}

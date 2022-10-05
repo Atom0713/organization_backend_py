@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
+from flask_jwt_extended import jwt_required
 
-from ..utils import handle_response
+from ..utils import handle_response, logger
 from .controller import (resolve_add_user, resolve_get_all_user_roles,
                          resolve_get_users_by_role)
 
@@ -8,18 +9,19 @@ bp = Blueprint("user", __name__, url_prefix="/user")
 
 
 @bp.route("/", methods=["GET"])
+@jwt_required()
 @handle_response
 def get_user_by_id():
-
     return {
-            "name": "Artem Sliusarenko",
-            "id": 1,
-            "role": "Staff",
-            "date": "2022-09-09",
+        "name": "Artem Sliusarenko",
+        "id": 1,
+        "role": "Staff",
+        "date": "2022-09-09",
     }
 
 
 @bp.route("/role/<role_id>/", methods=["GET"])
+@jwt_required()
 @handle_response
 def get_users_by_role(role_id):
 
@@ -27,6 +29,7 @@ def get_users_by_role(role_id):
 
 
 @bp.route("/roles", methods=["GET"])
+@jwt_required()
 @handle_response
 def get_all_user_roles():
 
@@ -34,6 +37,7 @@ def get_all_user_roles():
 
 
 @bp.route("/add", methods=["POST"])
+@jwt_required()
 @handle_response
 def add_user():
 

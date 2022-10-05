@@ -1,17 +1,22 @@
+import datetime
 import os
 
 from flask import Flask
 from flask_cors import CORS
+from flask_jwt_extended import JWTManager
 
 
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
+
     app.config.from_mapping(
-        SECRET_KEY="dev",
+        JWT_SECRET_KEY="super-secret",
+        JWT_ACCESS_TOKEN_EXPIRES=datetime.timedelta(days=1, seconds=5),
         DATABASE=os.path.join(app.instance_path, "flaskr.sqlite"),
     )
     CORS(app, resource={r"/*": {"origins": "*"}})
+    JWTManager(app)
     # CORS(app, origins=os.environ.get("CLIENT_URL", ["http://localhost:3000", "https://antalya-vandals-dashboard.herokuapp.com/"]))
 
     if test_config is None:
