@@ -5,13 +5,14 @@ from flask import Flask
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 
+
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
         JWT_SECRET_KEY="super-secret",
         JWT_ACCESS_TOKEN_EXPIRES=datetime.timedelta(days=1, seconds=5),
-        SQLALCHEMY_DATABASE_URI="mysql://root:HackMeNoMysql13@localhost:3306/antalyavandals"
+        SQLALCHEMY_DATABASE_URI="mysql://root:HackMeNoMysql13@localhost:3306/antalyavandals",
     )
 
     CORS(app, resource={r"/*": {"origins": "*"}})
