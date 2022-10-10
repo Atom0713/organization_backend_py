@@ -2,8 +2,11 @@ from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required
 
 from ..utils import handle_response, logger
-from .controller import (resolve_add_user, resolve_get_all_user_roles,
-                         resolve_get_users_by_role)
+from .controller import (
+    resolve_add_user,
+    resolve_get_all_user_roles,
+    resolve_get_users_by_role,
+)
 
 bp = Blueprint("user", __name__, url_prefix="/user")
 
