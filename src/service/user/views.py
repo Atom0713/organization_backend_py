@@ -43,5 +43,6 @@ def get_all_user_roles():
 @jwt_required()
 @handle_response
 def add_user():
-
-    return resolve_add_user()
+    email = resolve_add_user()
+    logger.info(f"Added new user. Username: {email}")
+    return {"username": email}, 200
