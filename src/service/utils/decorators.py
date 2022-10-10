@@ -8,7 +8,7 @@ def handle_response(func):
         except Exception as e:
             logger.error(e)
             # TODO does message exist? USe custom global Exception
-            return {"error": "Something went wrong!"}
+            return {"error": "Something went wrong!"}, 400
         return {"status": "ok", "data": response}
 
     wrapper.__name__ = func.__name__

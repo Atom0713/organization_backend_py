@@ -10,3 +10,7 @@ class User(db.Model):
     dob = db.Column(db.DateTime, nullable=False)
     role_id = db.Column(db.Integer, db.ForeignKey("role.id"), nullable=False)
     attendance = db.relationship("Attendance", backref="user", lazy=True)
+
+    @classmethod
+    def get(cls, user_id: int) -> "User":
+        return cls.query.get(user_id)

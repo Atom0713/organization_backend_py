@@ -1,8 +1,9 @@
-import uuid
-from flask import request
-from .queries import add_user
 from uuid import uuid4
 
+from flask import request
+
+from ..utils import logger
+from .queries import add_user
 
 
 def resolve_get_users_by_role(role_id):
@@ -97,12 +98,12 @@ def resolve_get_users_by_role(role_id):
 
 def resolve_add_user():
     email = request.json.get("email")
-    password =  uuid4().hex[0:10]
+    password = uuid4().hex[0:10]
     attributes = {
         "email": email,
         "first_name": request.json.get("first_name"),
         "last_name": request.json.get("last_name"),
-        "dob": request.json.get('dob'),
+        "dob": request.json.get("dob"),
         "role_id": request.json.get("role_id"),
         "password": password,
     }
@@ -110,13 +111,3 @@ def resolve_add_user():
     # TODO send email?
 
     return email
-
-
-def resolve_get_all_user_roles():
-    return {
-        "user_roles": [
-            #     {"id": 1, "name": "Admin"}, # TODO internal use only
-            {"id": 2, "name": "Staff"},
-            {"id": 3, "name": "Player"},
-        ]
-    }

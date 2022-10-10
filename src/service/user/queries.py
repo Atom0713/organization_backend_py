@@ -1,6 +1,7 @@
 from typing import Dict
-from src.models import User
+
 from src.datastore import db
+from src.models import User
 
 
 def add_user(attributes: Dict) -> None:

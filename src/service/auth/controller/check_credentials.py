@@ -1,6 +1,8 @@
-from flask import request
-from ..queries import get_user_by_username_password
 from typing import Optional
+
+from flask import request
+
+from ..queries import get_user_by_username_password
 
 
 def check_credentials() -> Optional[int]:
@@ -11,7 +13,6 @@ def check_credentials() -> Optional[int]:
     if not user:
         return None
     if len(user) > 1:
-        pass # TODO abort
+        pass  # TODO abort
 
     return user[0].id
-    
