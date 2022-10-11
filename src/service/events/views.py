@@ -15,7 +15,7 @@ bp = Blueprint("events", __name__, url_prefix="/event")
 @handle_response
 def handle_events():
     if request.method == HTTPRequestMethods.GET:
-        return resolve_get_events()
+        return {"events": resolve_get_events()}
 
     if request.method == HTTPRequestMethods.POST:
         return resolve_post_events()

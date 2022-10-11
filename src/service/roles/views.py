@@ -8,16 +8,15 @@ from .controller import (resolve_get_all_user_roles,
 bp = Blueprint("role", __name__, url_prefix="/role")
 
 
+@bp.route("/", methods=["GET"])
+@jwt_required()
+@handle_response
+def get_all_roles():
+    return {"roles": resolve_get_all_user_roles()}
+
+
 @bp.route("/user_id/<user_id>", methods=["GET"])
 @jwt_required()
 @handle_response
 def get_user_permissions(user_id):
     return resolve_get_user_permissions(user_id)
-
-
-@bp.route("/", methods=["GET"])
-@jwt_required()
-@handle_response
-def get_all_user_roles():
-
-    return {"roles": resolve_get_all_user_roles()}

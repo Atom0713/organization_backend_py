@@ -1,112 +1,63 @@
+from datetime import datetime
+from typing import Dict, List
 from uuid import uuid4
 
-from flask import request
+from flask import abort, request
+from flask_jwt_extended import get_jwt_identity
 
-from ..utils import logger
-from .queries import add_user
+from src.service.queries import get_role_name_by_id, get_user_by_id
+
+from ..queries import get_user_by_id
+from ..utils import DATE_FORMAT, ROLES, logger
+from .queries import add_user, get_all_users_by_role_id
 
 
-def resolve_get_users_by_role(role_id):
+def resolve_get_user_by_id(user_id: int) -> Dict:
+    return get_user_by_id(user_id).to_dict()
 
-    users = {
-        "2": [
-            {
-                "img": "assets/images/faces/face1.jpg",
-                "name": "Artem",
-                "birth_date": "05/04/1996",
-                "positions": "CB/LB",
-            },
-            {
-                "img": "assets/images/faces/face1.jpg",
-                "name": "Artem",
-                "birth_date": "05/04/1996",
-                "positions": "CB/LB",
-            },
-            {
-                "img": "assets/images/faces/face1.jpg",
-                "name": "Artem",
-                "birth_date": "05/04/1996",
-                "positions": "CB/LB",
-            },
-            {
-                "img": "assets/images/faces/face1.jpg",
-                "name": "Artem",
-                "birth_date": "05/04/1996",
-                "positions": "CB/LB",
-            },
-        ],
-        "3": [
-            {
-                "id": 1,
-                "img": "assets/images/faces/face1.jpg",
-                "name": "Artem",
-                "height": "175",
-                "weight": "75",
-                "position": "CB",
-                "birth_date": "05/04/1996",
-            },
-            {
-                "id": 2,
-                "img": "assets/images/faces/face1.jpg",
-                "name": "Artem",
-                "height": "175",
-                "weight": "75",
-                "position": "CB",
-                "birth_date": "05/04/1996",
-            },
-            {
-                "id": 3,
-                "img": "assets/images/faces/face1.jpg",
-                "name": "Artem",
-                "height": "175",
-                "weight": "75",
-                "position": "CB",
-                "birth_date": "05/04/1996",
-            },
-            {
-                "id": 4,
-                "img": "assets/images/faces/face1.jpg",
-                "name": "Artem",
-                "height": "175",
-                "weight": "75",
-                "position": "CB",
-                "birth_date": "05/04/1996",
-            },
-            {
-                "id": 5,
-                "img": "assets/images/faces/face1.jpg",
-                "name": "Artem",
-                "height": "175",
-                "weight": "75",
-                "position": "CB",
-                "birth_date": "05/04/1996",
-            },
-            {
-                "id": 6,
-                "img": "assets/images/faces/face1.jpg",
-                "name": "Artem",
-                "height": "175",
-                "weight": "75",
-                "position": "CB",
-                "birth_date": "05/04/1996",
-            },
-        ],
-    }
 
-    return users[role_id]
+def resolve_get_users_by_role(role_id: int) -> List[dict]:
+    return [user.to_dict() for user in get_all_users_by_role_id(role_id)]
 
 
 def resolve_add_user():
+    new_user_role_id = request.json.get("role_id")
+    new_user_role_name = get_role_name_by_id(new_user_role_id)
+
+    requester_user = get_user_by_id(get_jwt_identity())
+    requester_user_role_name = get_role_name_by_id(requester_user.role_id)
+
+    if (
+        new_user_role_name == ROLES.ADMIN
+        and not requester_user_role_name == ROLES.ADMIN
+    ):
+        logger.error(
+            f"User with role: {requester_user_role_name} trying to create ADMIN user. user_id: {requester_user.id}"
+        )
+        abort(401, "Not allowed. Non Admin can't create Admin user.")
+
     email = request.json.get("email")
     password = uuid4().hex[0:10]
     attributes = {
         "email": email,
         "first_name": request.json.get("first_name"),
         "last_name": request.json.get("last_name"),
-        "dob": request.json.get("dob"),
-        "role_id": request.json.get("role_id"),
+        "dob": datetime.strptime(request.json.get("dob"), DATE_FORMAT),
+        "role_id": new_user_role_id,
         "password": password,
     }
+
+    if new_user_role_name == ROLES.STAFF:
+        attributes["staff_details"] = {
+            "position": request.json.get("position"),
+        }
+    elif new_user_role_name == ROLES.PLAYER:
+        attributes["player_details"] = {
+            "position": request.json.get("position"),
+            "height": request.json.get("height"),
+            "weight": request.json.get("weight"),
+        }
+
     add_user(attributes)
     # TODO send email?
 

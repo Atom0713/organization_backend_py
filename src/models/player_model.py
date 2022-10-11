@@ -6,6 +6,11 @@ class Player(db.Model):
     height = db.Column(db.Float, nullable=False)
     weight = db.Column(db.Float, nullable=False)
     position = db.Column(db.String(20), nullable=False)
-    class_rank_id = db.Column(
-        db.Integer, db.ForeignKey("class_rank.id"), nullable=False
-    )
+    user = db.relationship("User", back_populates="player")
+
+    def to_dict(self):  # for build json format
+        return {
+            "height": self.height,
+            "weight": self.weight,
+            "position": self.position,
+        }

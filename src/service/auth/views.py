@@ -15,4 +15,4 @@ def handle_login():
         return {"msg": "Bad username or password"}, 401
 
     access_token = create_access_token(identity=user_id)
-    return jsonify(access_token=access_token), 200
+    return jsonify(access_token=access_token)
