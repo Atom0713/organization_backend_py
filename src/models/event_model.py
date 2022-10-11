@@ -11,6 +11,7 @@ class Event(db.Model):
     location = db.Column(db.String(50), nullable=False)
     completed = db.Column(db.Boolean, nullable=False)
     attendance = db.relationship("Attendance", backref="event", lazy=True)
+    comment = db.relationship("Comment", backref="user", lazy=True)
 
     @classmethod
     def get_all(cls) -> List["Event"]:

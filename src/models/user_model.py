@@ -12,6 +12,7 @@ class User(db.Model):
     attendance = db.relationship("Attendance", backref="user", lazy=True)
     staff = db.relationship("Staff", back_populates="user", uselist=False)
     player = db.relationship("Player", back_populates="user", uselist=False)
+    comment = db.relationship("Comment", backref="user", lazy=True)
 
     @classmethod
     def get(cls, user_id: int) -> "User":
