@@ -2,7 +2,7 @@ from src.datastore import db
 
 
 class Comment(db.Model):
-    id = db.Column(db.Integer, primary_key=True, auto_increment=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     comment = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True)
     event_id = db.Column(db.Integer, db.ForeignKey("event.id"), nullable=True)

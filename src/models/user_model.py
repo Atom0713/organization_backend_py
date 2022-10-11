@@ -12,7 +12,7 @@ class User(db.Model):
     attendance = db.relationship("Attendance", backref="user", lazy=True)
     staff = db.relationship("Staff", back_populates="user", uselist=False)
     player = db.relationship("Player", back_populates="user", uselist=False)
-    comment = db.relationship("Comment", backref="user", lazy=True)
+    role = db.relationship("Role", back_populates="user", uselist=False)
 
     @classmethod
     def get(cls, user_id: int) -> "User":
@@ -24,6 +24,7 @@ class User(db.Model):
             "name": f"{self.first_name} {self.last_name}",
             "email": self.email,
             "dob": self.dob,
+            "role": self.role.to_dict(),
         }
         if self.staff:
             user_details = {**user_details, **self.staff.to_dict()}
