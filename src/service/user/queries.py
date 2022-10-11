@@ -14,7 +14,7 @@ def get_all_users_by_role_id(role_id: int) -> List[User]:
     return user
 
 
-def add_user(attributes: Dict) -> None:
+def insert_user(attributes: Dict) -> None:
     staff_details = attributes.pop("staff_details", None)
     player_details = attributes.pop("player_details", None)
     user = User(**attributes)

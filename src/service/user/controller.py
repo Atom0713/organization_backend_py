@@ -5,15 +5,16 @@ from uuid import uuid4
 from flask import abort, request
 from flask_jwt_extended import get_jwt_identity
 
-from src.service.queries import get_role_name_by_id, get_user_by_id
+from src.service.queries import get_role_name_by_id, query_user_by_id
 
-from ..queries import get_user_by_id
 from ..utils import DATE_FORMAT, ROLES, logger
-from .queries import add_user, get_all_users_by_role_id
+from .queries import (get_all_users_by_role_id,  # TODO move to ..queries
+                      insert_user)
 
 
-def resolve_get_user_by_id(user_id: int) -> Dict:
-    return get_user_by_id(user_id).to_dict()
+def resolve_get_user_by_id() -> Dict:
+    user_id: int = get_jwt_identity()
+    return query_user_by_id(user_id).to_dict()
 
 
 def resolve_get_users_by_role(role_id: int) -> List[dict]:
@@ -24,15 +25,14 @@ def resolve_add_user():
     new_user_role_id = request.json.get("role_id")
     new_user_role_name = get_role_name_by_id(new_user_role_id)
 
-    requester_user = get_user_by_id(get_jwt_identity())
-    requester_user_role_name = get_role_name_by_id(requester_user.role_id)
+    requester_user = query_user_by_id(get_jwt_identity())
 
     if (
         new_user_role_name == ROLES.ADMIN
-        and not requester_user_role_name == ROLES.ADMIN
+        and not requester_user.role.name == ROLES.ADMIN
     ):
         logger.error(
-            f"User with role: {requester_user_role_name} trying to create ADMIN user. user_id: {requester_user.id}"
+            f"User with role: {requester_user.role.name} trying to create ADMIN user. user_id: {requester_user.id}"
         )
         abort(401, "Not allowed. Non Admin can't create Admin user.")
 
@@ -58,7 +58,7 @@ def resolve_add_user():
             "weight": request.json.get("weight"),
         }
 
-    add_user(attributes)
+    insert_user(attributes)
     # TODO send email?
 
     return email
