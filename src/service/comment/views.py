@@ -4,7 +4,7 @@ from flask_jwt_extended import jwt_required
 from src.service.constants import HTTPRequestMethods
 
 from ..utils import handle_response
-from .controller import resolve_add_comments, resolve_get_comments
+from .controller import resolve_get_comments, resolve_post_comment
 
 bp = Blueprint("comment", __name__, url_prefix="/comment")
 
@@ -17,4 +17,4 @@ def handle_comment():
         return resolve_get_comments()
 
     if request.method == HTTPRequestMethods.POST:
-        return resolve_add_comments()
+        return resolve_post_comment()

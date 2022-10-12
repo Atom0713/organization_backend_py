@@ -12,8 +12,8 @@ class Event(db.Model):
     completed = db.Column(db.Boolean, nullable=False, default=0)
 
     attendance = db.relationship("Attendance", backref="event", lazy=True)
-    comment = db.relationship("Comment", backref="user", lazy=True)
-    
+    comments = db.relationship("Comment", backref="event", lazy=True)
+
     @classmethod
     def get(cls, event_id: int) -> "Event":
         return Event.query.get(event_id)
@@ -23,16 +23,16 @@ class Event(db.Model):
         return Event.query.all()
 
     def to_dict(self, show_additional=True) -> Dict:
-        event_details =  {
+        event_details = {
             "id": self.id,
             "name": self.name,
             "description": self.description,
             "location": self.location,
             "date": self.date,
             "completed": self.completed,
-        } 
+        }
         if show_additional:
-            event_details['attendance'] = self.attendance
-            event_details['comments'] = self.comment
+            event_details["attendance"] = self.attendance
+            event_details["comments"] = [comment.to_dict() for comment in self.comments]
 
         return event_details

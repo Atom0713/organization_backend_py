@@ -9,10 +9,12 @@ class User(db.Model):
     password = db.Column(db.String(50), nullable=False)
     dob = db.Column(db.DateTime, nullable=False)
     role_id = db.Column(db.Integer, db.ForeignKey("role.id"), nullable=False)
+
     attendance = db.relationship("Attendance", backref="user", lazy=True)
     staff = db.relationship("Staff", back_populates="user", uselist=False)
     player = db.relationship("Player", back_populates="user", uselist=False)
     role = db.relationship("Role", back_populates="user", uselist=False)
+    comments = db.relationship("Comment", back_populates="user")
 
     @classmethod
     def get(cls, user_id: int) -> "User":

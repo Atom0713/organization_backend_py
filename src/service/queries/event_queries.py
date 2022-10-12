@@ -1,6 +1,7 @@
-from src.models import Event
 from typing import List
+
 from src.datastore import commit_to_db
+from src.models import Event
 
 
 def get_events_paginated() -> List[Event]:

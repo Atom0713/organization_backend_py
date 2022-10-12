@@ -1,9 +1,11 @@
+from datetime import datetime
 from typing import Dict
-from src.service.queries import get_events_paginated, insert_event, query_event
+
 from flask import request
 
+from src.service.queries import get_events_paginated, insert_event, query_event
+
 from ..utils import DATE_FORMAT, logger
-from datetime import datetime
 
 
 def resolve_get_events():
@@ -26,12 +28,12 @@ def resolve_post_event():
     logger.info(f"Created new event `{new_event.name}`.")
 
     return {
-            "id": new_event.id,
-            "name": new_event.name,
-            "description": new_event.description,
-            "date": new_event.date,
-            "location": new_event.location,
-        }
+        "id": new_event.id,
+        "name": new_event.name,
+        "description": new_event.description,
+        "date": new_event.date,
+        "location": new_event.location,
+    }
 
 
 def resolve_get_event_attendance(id):
