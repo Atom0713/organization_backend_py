@@ -1,16 +1,12 @@
+from typing import Dict, List
+
 from flask import request
 
-from ..queries import insert_comment
+from ..queries import insert_comment, query_event_comments
 
 
-def resolve_get_comments():
-    return [
-        {"comment": "Comment", "date": "2022/08/08 14:00:00", "author": "Artem"},
-        {"comment": "Comment", "date": "2022/08/08 14:00:00", "author": "Artem"},
-        {"comment": "Comment", "date": "2022/08/08 14:00:00", "author": "Artem"},
-        {"comment": "Comment", "date": "2022/08/08 14:00:00", "author": "Artem"},
-        {"comment": "Comment", "date": "2022/08/08 14:00:00", "author": "Artem"},
-    ]
+def resolve_get_event_comments(event_id: int) -> List[Dict]:
+    return [comment.to_dict() for comment in query_event_comments(event_id)]
 
 
 def resolve_post_comment():

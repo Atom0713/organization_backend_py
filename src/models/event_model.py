@@ -12,7 +12,6 @@ class Event(db.Model):
     completed = db.Column(db.Boolean, nullable=False, default=0)
 
     attendance = db.relationship("Attendance", backref="event", lazy=True)
-    comments = db.relationship("Comment", backref="event", lazy=True)
 
     @classmethod
     def get(cls, event_id: int) -> "Event":
@@ -33,6 +32,5 @@ class Event(db.Model):
         }
         if show_additional:
             event_details["attendance"] = self.attendance
-            event_details["comments"] = [comment.to_dict() for comment in self.comments]
 
         return event_details
