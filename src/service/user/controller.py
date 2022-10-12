@@ -5,11 +5,10 @@ from uuid import uuid4
 from flask import abort, request
 from flask_jwt_extended import get_jwt_identity
 
-from src.service.queries import get_role_name_by_id, query_user_by_id
+from src.service.queries import (get_all_users_by_role_id, get_role_name_by_id,
+                                 insert_user, query_user_by_id)
 
 from ..utils import DATE_FORMAT, ROLES, logger
-from .queries import (get_all_users_by_role_id,  # TODO move to ..queries
-                      insert_user)
 
 
 def resolve_get_user_by_id() -> Dict:
