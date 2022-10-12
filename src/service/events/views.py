@@ -5,7 +5,7 @@ from ..constants import HTTPRequestMethods
 from ..utils import handle_response
 from .controller import (resolve_get_event, resolve_get_event_attendance,
                          resolve_get_events, resolve_post_event_attendance,
-                         resolve_post_events)
+                         resolve_post_event)
 
 bp = Blueprint("events", __name__, url_prefix="/event")
 
@@ -18,7 +18,7 @@ def handle_events():
         return {"events": resolve_get_events()}
 
     if request.method == HTTPRequestMethods.POST:
-        return resolve_post_events()
+        return resolve_post_event()
 
 
 @bp.route("/<event_id>/", methods=["GET"])
