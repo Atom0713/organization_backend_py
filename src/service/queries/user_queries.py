@@ -18,7 +18,7 @@ def get_all_users_by_role_id(role_id: int) -> List[User]:
     return user
 
 
-def insert_user(attributes: Dict) -> None:
+def insert_user(attributes: Dict) -> "User":
     staff_details = attributes.pop("staff_details", None)
     player_details = attributes.pop("player_details", None)
     user = User(**attributes)
@@ -31,3 +31,5 @@ def insert_user(attributes: Dict) -> None:
 
     db.session.add(user)
     db.session.commit()
+
+    return user

@@ -11,8 +11,12 @@ from src.service.queries import (get_all_users_by_role_id, get_role_name_by_id,
 from ..utils import DATE_FORMAT, ROLES, logger
 
 
-def resolve_get_user_by_id() -> Dict:
+def resolve_get_user() -> Dict:
     user_id: int = get_jwt_identity()
+    return query_user_by_id(user_id).to_dict()
+
+
+def resolve_get_user_by_id(user_id: int) -> Dict:
     return query_user_by_id(user_id).to_dict()
 
 
@@ -20,7 +24,7 @@ def resolve_get_users_by_role(role_id: int) -> List[dict]:
     return [user.to_dict() for user in get_all_users_by_role_id(role_id)]
 
 
-def resolve_add_user():
+def resolve_add_user() -> Dict:
     new_user_role_id = request.json.get("role_id")
     new_user_role_name = get_role_name_by_id(new_user_role_id)
 
@@ -57,7 +61,7 @@ def resolve_add_user():
             "weight": request.json.get("weight"),
         }
 
-    insert_user(attributes)
+    new_user = insert_user(attributes)
     # TODO send email?
 
-    return email
+    return new_user.to_dict()
