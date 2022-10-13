@@ -10,7 +10,7 @@ class User(db.Model):
     dob = db.Column(db.DateTime, nullable=False)
     role_id = db.Column(db.Integer, db.ForeignKey("role.id"), nullable=False)
 
-    attendance = db.relationship("Attendance", backref="user", lazy=True)
+    attendance = db.relationship("Attendance", back_populates="user", lazy=True)
     staff = db.relationship("Staff", back_populates="user", uselist=False)
     player = db.relationship("Player", back_populates="user", uselist=False)
     role = db.relationship("Role", back_populates="user", uselist=False)

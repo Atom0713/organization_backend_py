@@ -11,7 +11,7 @@ class Event(db.Model):
     location = db.Column(db.String(50), nullable=False)
     completed = db.Column(db.Boolean, nullable=False, default=0)
 
-    attendance = db.relationship("Attendance", backref="event", lazy=True)
+    attendance = db.relationship("Attendance", back_populates="event")
 
     @classmethod
     def get(cls, event_id: int) -> "Event":
@@ -31,6 +31,6 @@ class Event(db.Model):
             "completed": self.completed,
         }
         if show_additional:
-            event_details["attendance"] = self.attendance
+            event_details["attendance"] = [i.to_dict() for i in self.attendance]
 
         return event_details

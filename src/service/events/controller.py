@@ -3,7 +3,8 @@ from typing import Dict
 
 from flask import request
 
-from src.service.queries import get_events_paginated, insert_event, query_event
+from src.service.queries import (get_events_paginated, insert_attendance,
+                                 insert_event, query_event)
 
 from ..utils import DATE_FORMAT, logger
 
@@ -44,5 +45,10 @@ def resolve_get_event_attendance(id):
     }
 
 
-def resolve_post_event_attendance(id):
-    return {"status": "success", "id": 5}
+def resolve_post_event_attendance() -> Dict:
+    event_id = request.json.get("event_id")
+    attendance = request.json.get("attendance")
+    attributes = attendance["player_ids"]
+
+    insert_attendance(attributes, event_id)
+    return {"event_id": event_id}

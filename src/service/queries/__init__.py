@@ -1,5 +1,6 @@
 from typing import List
 
+from .attendance_queries import insert_attendance
 from .comment_queries import insert_comment, query_event_comments
 from .event_queries import get_events_paginated, insert_event, query_event
 from .role_queries import get_role_name_by_id
@@ -16,4 +17,5 @@ __all__: List[str] = [
     "query_event",
     "insert_comment",
     "query_event_comments",
+    "insert_attendance",
 ]

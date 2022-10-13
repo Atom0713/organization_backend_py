@@ -28,12 +28,8 @@ def get_event_by_id(event_id):
     return resolve_get_event(event_id)
 
 
-@bp.route("/attendance/<id>/", methods=["GET", "POST"])
+@bp.route("/attendance/", methods=["POST"])
 @jwt_required()
 @handle_response
-def add_attendance(id):
-    if request.method == HTTPRequestMethods.GET:
-        return resolve_get_event_attendance(id)
-
-    if request.method == HTTPRequestMethods.POST:
-        return resolve_post_event_attendance(id)
+def add_attendance():
+    return resolve_post_event_attendance()
