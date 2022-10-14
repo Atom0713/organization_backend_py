@@ -5,7 +5,7 @@ from ..constants import HTTPRequestMethods
 from ..utils import handle_response
 from .controller import (resolve_get_event, resolve_get_event_attendance,
                          resolve_get_events, resolve_post_event,
-                         resolve_post_event_attendance)
+                         resolve_post_event_attendance, resolve_get_event_attendance)
 
 bp = Blueprint("events", __name__, url_prefix="/event")
 
@@ -33,3 +33,10 @@ def get_event_by_id(event_id):
 @handle_response
 def add_attendance():
     return resolve_post_event_attendance()
+
+
+@bp.route("/attendance/<event_id>/", methods=["GET"])
+@jwt_required()
+@handle_response
+def add_attendance_by_event(event_id: int):
+    return {"attendance": resolve_get_event_attendance(event_id)}

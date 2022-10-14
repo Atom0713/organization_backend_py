@@ -12,9 +12,16 @@ class Attendance(db.Model):
     user = db.relationship("User", back_populates="attendance")
     event = db.relationship("Event", back_populates="attendance")
 
+    @classmethod
+    def get(cls, event_id: int, user_id: int) -> "Attendance":
+        return cls.query.get(event_id, user_id)
+
     def to_dict(self) -> Dict:
+        user = self.user.to_dict()
         return {
             "present": self.present,
             "absence_reason": self.absence_reason,
-            "user": self.user.to_dict(),
+            "first_name": user['first_name'],
+            "last_name": user['last_name'],
+            "user_id": user['id'],
         }

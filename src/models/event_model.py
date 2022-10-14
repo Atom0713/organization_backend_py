@@ -21,7 +21,7 @@ class Event(db.Model):
     def get_all(cls) -> List["Event"]:
         return Event.query.all()
 
-    def to_dict(self, show_additional=True) -> Dict:
+    def to_dict(self) -> Dict:
         event_details = {
             "id": self.id,
             "name": self.name,
@@ -30,7 +30,5 @@ class Event(db.Model):
             "date": self.date,
             "completed": self.completed,
         }
-        if show_additional:
-            event_details["attendance"] = [i.to_dict() for i in self.attendance]
 
         return event_details

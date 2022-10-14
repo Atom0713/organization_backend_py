@@ -14,7 +14,7 @@ def handle_post_comment():
     return resolve_post_comment()
 
 
-@bp.route("/event/<event_id>", methods=["GET"])
+@bp.route("/event/<event_id>/", methods=["GET"])
 @jwt_required()
 @handle_response
 def get_event_comments(event_id):

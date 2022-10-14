@@ -4,13 +4,13 @@ from typing import Dict
 from flask import request
 
 from src.service.queries import (get_events_paginated, insert_attendance,
-                                 insert_event, query_event)
+                                 insert_event, query_event, query_event_attendance_by_event_id)
 
 from ..utils import DATE_FORMAT, logger
 
 
 def resolve_get_events():
-    return [event.to_dict(show_additional=False) for event in get_events_paginated()]
+    return [event.to_dict() for event in get_events_paginated()]
 
 
 def resolve_get_event(event_id: int) -> Dict:
@@ -52,3 +52,8 @@ def resolve_post_event_attendance() -> Dict:
 
     insert_attendance(attributes, event_id)
     return {"event_id": event_id}
+
+
+def resolve_get_event_attendance(event_id: int) -> Dict:
+    event_attendance = query_event_attendance_by_event_id(event_id)
+    return [attendie.to_dict() for attendie in event_attendance]

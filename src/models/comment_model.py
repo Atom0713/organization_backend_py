@@ -15,9 +15,10 @@ class Comment(db.Model):
     user = db.relationship("User", back_populates="comments", uselist=False)
 
     def to_dict(self):
+        user = self.user.to_dict()
         return {
             "comment": self.comment,
-            "author": self.user.to_dict()["name"],
+            "author": f"{user['first_name']} {user['last_name']}",
             "approved": self.approved,
             "public": self.public,
             "date": self.created_at,

@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, List
 
 from src.datastore import commit_to_db
 from src.models import Attendance, Event, User
@@ -12,3 +12,7 @@ def insert_attendance(attributes: Dict, event_id: int) -> None:
         commit_to_db(new_attendance)
     event.completed = True
     commit_to_db(event)
+
+
+def query_event_attendance_by_event_id(event_id: int) -> List["Attendance"]:
+    return Attendance.query.filter(Attendance.event_id == event_id).all()

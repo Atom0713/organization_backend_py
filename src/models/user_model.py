@@ -20,10 +20,11 @@ class User(db.Model):
     def get(cls, user_id: int) -> "User":
         return cls.query.get(user_id)
 
-    def to_dict(self):  # for build json format
+    def to_dict(self):
         user_details = {
             "id": self.id,
-            "name": f"{self.first_name} {self.last_name}",
+            "first_name": self.first_name,
+            "last_name": self.last_name,
             "email": self.email,
             "dob": self.dob,
             "role": self.role.to_dict(),
