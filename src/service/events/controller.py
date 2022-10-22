@@ -28,13 +28,7 @@ def resolve_post_event():
     new_event = insert_event(attributes)
     logger.info(f"Created new event `{new_event.name}`.")
 
-    return {
-        "id": new_event.id,
-        "name": new_event.name,
-        "description": new_event.description,
-        "date": new_event.date,
-        "location": new_event.location,
-    }
+    return new_event.to_dict()
 
 
 def resolve_get_event_attendance(id):

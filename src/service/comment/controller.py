@@ -6,7 +6,7 @@ from ..queries import insert_comment, query_event_comments
 
 
 def resolve_get_event_comments(event_id: int) -> List[Dict]:
-    return [comment.to_dict() for comment in query_event_comments(event_id)]
+    return {"data": [comment.to_dict() for comment in query_event_comments(event_id)]}
 
 
 def resolve_post_comment():
@@ -17,6 +17,4 @@ def resolve_post_comment():
     }
 
     new_comment = insert_comment(attributes)
-    return {
-        "comment": new_comment.comment,
-    }
+    return new_comment.to_dict()

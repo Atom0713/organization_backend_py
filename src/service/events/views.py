@@ -15,7 +15,7 @@ bp = Blueprint("events", __name__, url_prefix="/event")
 @handle_response
 def handle_events():
     if request.method == HTTPRequestMethods.GET:
-        return {"events": resolve_get_events()}
+        return {"data": resolve_get_events()}
 
     if request.method == HTTPRequestMethods.POST:
         return resolve_post_event()
@@ -39,4 +39,4 @@ def add_attendance():
 @jwt_required()
 @handle_response
 def add_attendance_by_event(event_id: int):
-    return {"attendance": resolve_get_event_attendance(event_id)}
+    return {"data": resolve_get_event_attendance(event_id)}
