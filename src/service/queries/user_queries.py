@@ -18,6 +18,9 @@ def get_all_users_by_role_id(role_id: int) -> List[User]:
     return user
 
 
+def get_all_users() -> List[User]:
+    return User.query.all()
+
 def insert_user(attributes: Dict) -> "User":
     staff_details = attributes.pop("staff_details", None)
     player_details = attributes.pop("player_details", None)

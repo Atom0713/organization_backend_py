@@ -6,18 +6,21 @@ from flask import abort, request
 from flask_jwt_extended import get_jwt_identity
 
 from src.service.queries import (get_all_users_by_role_id, get_role_name_by_id,
-                                 insert_user, query_user_by_id)
+                                 insert_user, query_user_by_id, get_all_users)
 
 from ..utils import DATE_FORMAT, ROLES, logger
 
 
 def resolve_get_user() -> Dict:
-    user_id: int = get_jwt_identity()
+    user_id: int = 1  # get_jwt_identity()
     return query_user_by_id(user_id).to_dict()
 
 
 def resolve_get_user_by_id(user_id: int) -> Dict:
     return query_user_by_id(user_id).to_dict()
+
+def resolve_get_users() -> List[dict]:
+    return [user.to_dict() for user in get_all_users()]
 
 
 def resolve_get_users_by_role(role_id: int) -> List[dict]:

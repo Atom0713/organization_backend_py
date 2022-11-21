@@ -12,7 +12,8 @@ def create_app(test_config=None):
     app.config.from_mapping(
         JWT_SECRET_KEY="super-secret",
         JWT_ACCESS_TOKEN_EXPIRES=datetime.timedelta(days=1, seconds=5),
-        SQLALCHEMY_DATABASE_URI= os.environ.get("MYSQL_DATABASE_URI") # "mysql://root:HackMeNoMysql13@localhost:3306/antalyavandals",
+        SQLALCHEMY_DATABASE_URI= "mysql://root:HackMeNoMysql13@localhost:3306/antalyavandals" #os.environ.get("MYSQL_DATABASE_URI") # "mysql://root:HackMeNoMysql13@localhost:3306/antalyavandals",
+        # "mysql://dev_admin:pRO&m&h3o4f6@antalyavandalsdb.cta4daeg11ai.eu-west-1.rds.amazonaws.com:3306/antalyavandalsdb"
     )
 
     CORS(app, resource={r"/*": {"origins": "*"}})
