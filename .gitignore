@@ -1,4 +1,6 @@
+# Virtual environemnt
 venv/
+venv_*
 
 *.pyc
 __pycache__/
@@ -13,5 +15,5 @@ dist/
 build/
 *.egg-info/
 
-venv_*
+# Log files
 *.log
