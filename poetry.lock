@@ -69,7 +69,7 @@ test = ["pytest (>=6)"]
 name = "flake8"
 version = "6.0.0"
 description = "the modular source code checker: pep8 pyflakes and co"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.8.1"
 
@@ -77,6 +77,21 @@ python-versions = ">=3.8.1"
 mccabe = ">=0.7.0,<0.8.0"
 pycodestyle = ">=2.10.0,<2.11.0"
 pyflakes = ">=3.0.0,<3.1.0"
+
+[[package]]
+name = "flake8-pyproject"
+version = "1.2.2"
+description = "Flake8 plug-in loading the configuration from pyproject.toml"
+category = "main"
+optional = false
+python-versions = ">= 3.6"
+
+[package.dependencies]
+Flake8 = ">=5"
+TOMLi = {version = "*", markers = "python_version < \"3.11\""}
+
+[package.extras]
+dev = ["pytest", "pytest-cov"]
 
 [[package]]
 name = "flask"
@@ -204,7 +219,7 @@ python-versions = ">=3.7"
 name = "mccabe"
 version = "0.7.0"
 description = "McCabe checker, plugin for flake8"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6"
 
@@ -311,7 +326,7 @@ python-versions = ">=3.7"
 name = "pycodestyle"
 version = "2.10.0"
 description = "Python style guide checker"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6"
 
@@ -319,7 +334,7 @@ python-versions = ">=3.6"
 name = "pyflakes"
 version = "3.0.1"
 description = "passive checker of Python programs"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6"
 
@@ -401,7 +416,7 @@ sqlcipher = ["sqlcipher3-binary"]
 name = "tomli"
 version = "2.0.1"
 description = "A lil' TOML parser"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.7"
 
@@ -430,7 +445,7 @@ watchdog = ["watchdog"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "a65d111d9b9359de11c4a31afb37784295ffc7bf2300c28052255006c84632ef"
+content-hash = "3cc348723b4e071fb4dacde0fa737cc4c433796b1ef7e18187712c8df3c891cc"
 
 [metadata.files]
 attrs = []
@@ -439,6 +454,7 @@ click = []
 colorama = []
 exceptiongroup = []
 flake8 = []
+flake8-pyproject = []
 flask = []
 flask-cors = []
 flask-jwt-extended = []
