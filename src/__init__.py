@@ -9,12 +9,12 @@ from flask_jwt_extended import JWTManager
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
-
     app.config.from_mapping(
         JWT_SECRET_KEY="super-secret",
         JWT_ACCESS_TOKEN_EXPIRES=datetime.timedelta(days=1, seconds=5),
-        DATABASE=os.path.join(app.instance_path, "flaskr.sqlite"),
+        SQLALCHEMY_DATABASE_URI= os.environ.get("MYSQL_DATABASE_URI") # "mysql://root:HackMeNoMysql13@localhost:3306/antalyavandals",
     )
+
     CORS(app, resource={r"/*": {"origins": "*"}})
     JWTManager(app)
     # CORS(app, origins=os.environ.get("CLIENT_URL", ["http://localhost:3000", "https://antalya-vandals-dashboard.herokuapp.com/"]))
@@ -45,5 +45,9 @@ def create_app(test_config=None):
     app.register_blueprint(ROLE)
     app.register_blueprint(EVENTS)
     app.register_blueprint(COMMENT)
+
+    # db.init_app(app)
+    # with app.app_context():
+    #     db.create_all()
 
     return app

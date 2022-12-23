@@ -1,8 +1,8 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint
 from flask_jwt_extended import jwt_required
 
 from ..utils import handle_response, logger
-from .controller import (resolve_add_user, resolve_get_all_user_roles,
+from .controller import (resolve_add_user, resolve_get_user_by_id, resolve_get_user,
                          resolve_get_users_by_role)
 
 bp = Blueprint("user", __name__, url_prefix="/user")
@@ -11,13 +11,15 @@ bp = Blueprint("user", __name__, url_prefix="/user")
 @bp.route("/", methods=["GET"])
 @jwt_required()
 @handle_response
-def get_user_by_id():
-    return {
-        "name": "Artem Sliusarenko",
-        "id": 1,
-        "role": "Staff",
-        "date": "2022-09-09",
-    }
+def get_user():
+    return resolve_get_user()
+
+
+@bp.route("/<user_id>", methods=["GET"])
+@jwt_required()
+@handle_response
+def get_user_by_id(user_id):
+    return resolve_get_user_by_id(user_id)
 
 
 @bp.route("/role/<role_id>/", methods=["GET"])
@@ -28,17 +30,10 @@ def get_users_by_role(role_id):
     return resolve_get_users_by_role(role_id)
 
 
-@bp.route("/roles", methods=["GET"])
-@jwt_required()
-@handle_response
-def get_all_user_roles():
-
-    return resolve_get_all_user_roles()
-
-
 @bp.route("/add", methods=["POST"])
 @jwt_required()
 @handle_response
 def add_user():
-
-    return resolve_add_user()
+    new_user = resolve_add_user()
+    logger.info(f"Added new user. Username: {new_user['email']}")
+    return new_user
