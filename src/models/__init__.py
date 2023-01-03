@@ -7,6 +7,7 @@ from .player_model import Player
 from .role_model import Role
 from .staff_model import Staff
 from .user_model import User
+from .position import Position
 
 __all__: List[str] = [
     "User",
@@ -16,4 +17,5 @@ __all__: List[str] = [
     "Staff",
     "Attendance",
     "Comment",
+    "Position",
 ]
