@@ -42,9 +42,8 @@ def resolve_get_event_attendance(id):
 def resolve_post_event_attendance() -> Dict:
     event_id = request.json.get("event_id")
     attendance = request.json.get("attendance")
-    attributes = attendance["player_ids"]
 
-    insert_attendance(attributes, event_id)
+    insert_attendance(attendance, event_id)
     return {"event_id": event_id}
 
 

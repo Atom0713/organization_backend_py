@@ -52,16 +52,17 @@ def resolve_add_user() -> Dict:
 
     if new_user_role_name == ROLES.STAFF:
         attributes["staff_details"] = {
-            "position": request.json.get("position"),
+            "position_id": request.json.get("position_id"),
         }
     elif new_user_role_name == ROLES.PLAYER:
         attributes["player_details"] = {
-            "position": request.json.get("position"),
+            "position_id": request.json.get("position_id"),
             "height": request.json.get("height"),
             "weight": request.json.get("weight"),
         }
 
     new_user = insert_user(attributes)
     # TODO send email?
-
+    
+    logger.info(f"Added new user. Username: {new_user.email}")
     return new_user.to_dict()

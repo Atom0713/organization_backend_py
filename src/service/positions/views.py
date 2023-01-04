@@ -4,7 +4,7 @@ from flask_jwt_extended import jwt_required
 from ..utils import handle_response
 from .controller import get_all_positions
 
-bp = Blueprint("positions", __name__, url_prefix="/positions")
+bp = Blueprint("position", __name__, url_prefix="/position")
 
 
 @bp.route("/", strict_slashes=False, methods=["GET"])
