@@ -1,1 +1,1 @@
-from .views import bp as EVENTS
+from .views import bp as EVENTS  # noqa: F401

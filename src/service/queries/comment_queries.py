@@ -1,4 +1,3 @@
-from multiprocessing import Event
 from typing import Dict, List
 
 from src.datastore import commit_to_db
@@ -13,8 +12,4 @@ def insert_comment(attributes: Dict) -> "Comment":
 
 
 def query_event_comments(event_id: int) -> List[Comment]:
-    return (
-        Comment.query.filter(Comment.event_id == event_id)
-        .filter(Comment.public == False)
-        .all()
-    )
+    return Comment.query.filter(Comment.event_id == event_id).filter(Comment.public is False).all()

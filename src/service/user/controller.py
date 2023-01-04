@@ -5,8 +5,12 @@ from uuid import uuid4
 from flask import abort, request
 from flask_jwt_extended import get_jwt_identity
 
-from src.service.queries import (get_all_users_by_role_id, get_role_name_by_id,
-                                 insert_user, query_user_by_id)
+from src.service.queries import (
+    get_all_users_by_role_id,
+    get_role_name_by_id,
+    insert_user,
+    query_user_by_id,
+)
 
 from ..utils import DATE_FORMAT, ROLES, logger
 
@@ -30,10 +34,7 @@ def resolve_add_user() -> Dict:
 
     requester_user = query_user_by_id(get_jwt_identity())
 
-    if (
-        new_user_role_name == ROLES.ADMIN
-        and not requester_user.role.name == ROLES.ADMIN
-    ):
+    if new_user_role_name == ROLES.ADMIN and not requester_user.role.name == ROLES.ADMIN:
         logger.error(
             f"User with role: {requester_user.role.name} trying to create ADMIN user. user_id: {requester_user.id}"
         )
@@ -52,11 +53,11 @@ def resolve_add_user() -> Dict:
 
     if new_user_role_name == ROLES.STAFF:
         attributes["staff_details"] = {
-            "position": request.json.get("position"),
+            "position_id": request.json.get("position_id"),
         }
     elif new_user_role_name == ROLES.PLAYER:
         attributes["player_details"] = {
-            "position": request.json.get("position"),
+            "position_id": request.json.get("position_id"),
             "height": request.json.get("height"),
             "weight": request.json.get("weight"),
         }
@@ -64,4 +65,5 @@ def resolve_add_user() -> Dict:
     new_user = insert_user(attributes)
     # TODO send email?
 
+    logger.info(f"Added new user. Username: {new_user.email}")
     return new_user.to_dict()

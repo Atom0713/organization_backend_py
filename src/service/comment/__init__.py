@@ -1,1 +1,1 @@
-from .views import bp as COMMENT
+from .views import bp as COMMENT  # noqa: F401
