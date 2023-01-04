@@ -42,4 +42,4 @@ def add_attendance():
 @jwt_required()
 @handle_response
 def add_attendance_by_event(event_id: int):
-    return {"data": resolve_get_event_attendance(event_id)}
+    return resolve_get_event_attendance(event_id)
