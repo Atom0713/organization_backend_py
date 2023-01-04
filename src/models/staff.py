@@ -9,4 +9,4 @@ class Staff(db.Model):
     position = db.relationship("Position", back_populates="staff", uselist=False)
 
     def to_dict(self):
-        return self.position.to_dict()
+        return {"position": self.position.name}
