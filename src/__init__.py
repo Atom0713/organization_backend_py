@@ -12,12 +12,15 @@ def create_app(test_config=None):
     app.config.from_mapping(
         JWT_SECRET_KEY="super-secret",
         JWT_ACCESS_TOKEN_EXPIRES=datetime.timedelta(days=1, seconds=5),
-        SQLALCHEMY_DATABASE_URI= os.environ.get("MYSQL_DATABASE_URI") # "mysql://root:HackMeNoMysql13@localhost:3306/antalyavandals",
+        SQLALCHEMY_DATABASE_URI=os.environ.get(
+            "MYSQL_DATABASE_URI"
+        ),  # "mysql://root:HackMeNoMysql13@localhost:3306/antalyavandals",
     )
 
     CORS(app, resource={r"/*": {"origins": "*"}})
     JWTManager(app)
-    # CORS(app, origins=os.environ.get("CLIENT_URL", ["http://localhost:3000", "https://antalya-vandals-dashboard.herokuapp.com/"]))
+    # CORS(app, origins=os.environ.get(
+    # "CLIENT_URL", ["http://localhost:3000", "https://antalya-vandals-dashboard.herokuapp.com/"]))
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
@@ -36,9 +39,9 @@ def create_app(test_config=None):
     from .service.comment import COMMENT
     from .service.common import bp as common
     from .service.events import EVENTS
+    from .service.positions import bp as positions
     from .service.roles import ROLE
     from .service.user import bp as user
-    from .service.positions import bp as positions
 
     app.register_blueprint(common)
     app.register_blueprint(auth)

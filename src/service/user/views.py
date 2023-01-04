@@ -1,9 +1,13 @@
 from flask import Blueprint, request
 from flask_jwt_extended import jwt_required
 
-from ..utils import handle_response, logger, HTTPRequestMethods
-from .controller import (resolve_add_user, resolve_get_user_by_id, resolve_get_user,
-                         resolve_get_users_by_role)
+from ..utils import HTTPRequestMethods, handle_response
+from .controller import (
+    resolve_add_user,
+    resolve_get_user,
+    resolve_get_user_by_id,
+    resolve_get_users_by_role,
+)
 
 bp = Blueprint("user", __name__, url_prefix="/user")
 
@@ -18,7 +22,7 @@ def handle_user():
 
     if request.method == HTTPRequestMethods.POST:
         return resolve_add_user()
-    return 
+    return
 
 
 @bp.route("/<user_id>", methods=["GET"])

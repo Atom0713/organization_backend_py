@@ -1,10 +1,14 @@
 from flask import Blueprint, request
 from flask_jwt_extended import jwt_required
 
-from ..utils import handle_response, HTTPRequestMethods
-from .controller import (resolve_get_event, resolve_get_event_attendance,
-                         resolve_get_events, resolve_post_event,
-                         resolve_post_event_attendance, resolve_get_event_attendance)
+from ..utils import HTTPRequestMethods, handle_response
+from .controller import (
+    resolve_get_event,
+    resolve_get_event_attendance,
+    resolve_get_events,
+    resolve_post_event,
+    resolve_post_event_attendance,
+)
 
 bp = Blueprint("events", __name__, url_prefix="/event")
 

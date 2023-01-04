@@ -1,8 +1,10 @@
 from flask import jsonify
-from .logger import logger
 from jwt.exceptions import ExpiredSignatureError
 
+from .logger import logger
+
 CUSTOMERROR = []
+
 
 def handle_response(func):
     def wrapper(*args, **kwargs):

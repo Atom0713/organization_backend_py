@@ -4,8 +4,7 @@ from .attendance_queries import insert_attendance, query_event_attendance_by_eve
 from .comment_queries import insert_comment, query_event_comments
 from .event_queries import get_events_paginated, insert_event, query_event
 from .role_queries import get_role_name_by_id
-from .user_queries import (get_all_users_by_role_id, insert_user,
-                           query_user_by_id)
+from .user_queries import get_all_users_by_role_id, insert_user, query_user_by_id
 
 __all__: List[str] = [
     "get_role_name_by_id",

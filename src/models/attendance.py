@@ -21,7 +21,7 @@ class Attendance(db.Model):
         return {
             "present": self.present,
             "absence_reason": self.absence_reason,
-            "first_name": user['first_name'],
-            "last_name": user['last_name'],
-            "user_id": user['id'],
+            "first_name": user["first_name"],
+            "last_name": user["last_name"],
+            "user_id": user["id"],
         }

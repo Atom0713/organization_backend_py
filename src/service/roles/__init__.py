@@ -1,1 +1,1 @@
-from .views import bp as ROLE
+from .views import bp as ROLE  # noqa: F401

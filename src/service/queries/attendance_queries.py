@@ -1,4 +1,4 @@
-from typing import Dict, List
+from typing import List
 
 from src.datastore import commit_to_db
 from src.models import Attendance, Event, User
@@ -10,7 +10,7 @@ def insert_attendance(attendance: List, event_id: int) -> None:
     for player_attendance in attendance:
         user = User.get(player_attendance["user_id"])
         player_attendance.pop("user_id")
-        collection.append(Attendance(**player_attendance, user=user,  event=event))
+        collection.append(Attendance(**player_attendance, user=user, event=event))
 
     commit_to_db(collection, multiple=True)
     event.completed = True
