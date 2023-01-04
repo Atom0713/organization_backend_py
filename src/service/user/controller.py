@@ -25,7 +25,7 @@ def resolve_get_user_by_id(user_id: int) -> Dict:
 
 
 def resolve_get_users_by_role(role_id: int) -> List[dict]:
-    return {"data": [user.to_dict() for user in get_all_users_by_role_id(role_id)]}
+    return [user.to_dict() for user in get_all_users_by_role_id(role_id)]
 
 
 def resolve_add_user() -> Dict:

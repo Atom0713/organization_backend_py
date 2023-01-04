@@ -14,4 +14,5 @@ class Player(db.Model):
         return {
             "height": self.height,
             "weight": self.weight,
+            "position": self.position.name,
         }
