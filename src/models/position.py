@@ -15,4 +15,4 @@ class Position(db.Model):
         return Position.query.all()
 
     def to_dict(self) -> Dict:
-        return {"position": {"name": self.name}}
+        return {"id": self.id, "name": self.name}
