@@ -6,8 +6,8 @@ on:
       - master
   
 jobs:
-  Run tests:
-    name: _run_tests_job_id_
+  _run_tests_job_id_:
+    name: Information
     runs-on: ubuntu-latest
     steps:
       - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
