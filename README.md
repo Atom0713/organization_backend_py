@@ -5,24 +5,43 @@
 Backend for Antalya Vandals Dashboard
 
 ## Manage dependecies
+### Add dependency
+ > poetry add [dependency-name]
+ 
+ It will resolve and write the dependency, with it's requirements, to the `poetry.lock` file. 
+ 
+ **Remember to commit `poetry.lock` to git.**
 
 ## Contribution
 
 ## Running locally
-To run service locally:
-1. Create virtual environemnt: `python -m venv venv`
-2. Activate virtual environment: `venv\Scripts\activate`(Windows)
-3. Install dependencies: `poetry install`
-4. Start application using:
-    a. `scripts/run_dev_env.sh` script in bash 
-    b. `flask --debug run` in CMD (windows)
+- Windows
+1. Create virtual environemnt
+    > python -m venv venv
+2. Activate virtual environment: 
+    > venv\Scripts\activate
+3. Install dependency management tool called `poetry`
+3. Install dependencies
+    > poetry install
+4. Start the application in the debug mode
+    > flask --debug run
 
-`deactivate` to deactivate virtual environement.
+To deactivate virtual environement type `deactivate` in the Command Prompt
+
+- Linux/macOS
 
 ## Testing
-Use `scripts/run_tests.sh` to run linting, typing, and run tests.
+### Linting check:
+- Windows.
+> poetry run flake8
+- Linux/macOS
 
-### Add dependency:
- Run `poetry add [dependency-name]`. It will resolve and write the dependency, with it's requirements, to the `poetry.lock` file. 
- 
- **Remember to commit `poetry.lock` to git.** 
+### Typing check:
+- Windows.
+> poetry run mypy
+- Linux/macOS
+
+### Run tests:
+- Windows.
+> poetry run pytest
+- Linux/macOS 
