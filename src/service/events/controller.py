@@ -11,7 +11,7 @@ from src.service.queries import (
     query_event_attendance_by_event_id,
 )
 
-from ..utils import DATE_FORMAT, logger
+from ..utils import DATETIME_FORMAT, logger
 
 
 def resolve_get_events():
@@ -26,7 +26,7 @@ def resolve_post_event():
     attributes = {
         "name": request.json.get("name"),
         "description": request.json.get("description"),
-        "date": datetime.strptime(request.json.get("date"), DATE_FORMAT),
+        "date": datetime.strptime(request.json.get("date"), DATETIME_FORMAT),
         "location": request.json.get("location"),
     }
 
