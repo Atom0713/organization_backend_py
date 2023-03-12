@@ -46,7 +46,7 @@ def resolve_add_user() -> Dict:
         "email": email,
         "first_name": request.json.get("first_name"),
         "last_name": request.json.get("last_name"),
-        "dob": datetime.strptime(request.json.get("dob"), DATE_FORMAT),
+        "dob": datetime.strptime(request.json.get("dob"), DATE_FORMAT).date() ,
         "role_id": new_user_role_id,
         "password": password,
     }
