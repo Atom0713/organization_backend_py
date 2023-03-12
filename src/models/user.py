@@ -1,4 +1,5 @@
 from src.datastore import db
+from ..service.utils import DATE_FORMAT
 
 
 class User(db.Model):
@@ -7,7 +8,7 @@ class User(db.Model):
     last_name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(50), nullable=False)
     password = db.Column(db.String(50), nullable=False)
-    dob = db.Column(db.DateTime, nullable=False)
+    dob = db.Column(db.Date, nullable=False)
     role_id = db.Column(db.Integer, db.ForeignKey("role.id"), nullable=False)
 
     attendance = db.relationship("Attendance", back_populates="user", lazy=True)
@@ -26,12 +27,11 @@ class User(db.Model):
             "first_name": self.first_name,
             "last_name": self.last_name,
             "email": self.email,
-            "dob": self.dob,
+            "dob": self.dob.strftime(DATE_FORMAT),
             "role": self.role.to_dict(),
         }
         if self.staff:
             user_details = {**user_details, **self.staff.to_dict()}
         if self.player:
             user_details = {**user_details, **self.player.to_dict()}
-
         return user_details
