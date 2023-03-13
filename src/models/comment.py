@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from src.datastore import db
+from ..service.utils import EVENT_DATE_FORMAT
 
 
 class Comment(db.Model):
@@ -21,5 +22,5 @@ class Comment(db.Model):
             "author": f"{user['first_name']} {user['last_name']}",
             "approved": self.approved,
             "public": self.public,
-            "date": self.created_at,
+            "created_at": self.created_at.strftime(EVENT_DATE_FORMAT),
         }

@@ -1,6 +1,7 @@
 from typing import Dict, List
 
 from src.datastore import db
+from ..service.utils import EVENT_DATE_FORMAT
 
 
 class Event(db.Model):
@@ -27,7 +28,7 @@ class Event(db.Model):
             "name": self.name,
             "description": self.description,
             "location": self.location,
-            "date": self.date,
+            "date": self.date.strftime(EVENT_DATE_FORMAT),
             "completed": self.completed,
         }
 
