@@ -14,7 +14,7 @@ def create_app(test_config=None):
         JWT_ACCESS_TOKEN_EXPIRES=datetime.timedelta(days=1, seconds=5),
         SQLALCHEMY_DATABASE_URI=os.environ.get(
             "MYSQL_DATABASE_URI"
-        ),  # "mysql://root:HackMeNoMysql13@localhost:3306/antalyavandals",
+        ),
     )
 
     CORS(app, resource={r"/*": {"origins": "*"}})
