@@ -9,7 +9,7 @@ mysql:
 		-e MYSQL_DATABASE=organizationdb \
 		mysql:8.0
 build:
-	docker build --no-cache -t organization_py .
+	docker build -t organization_py .
 
 run: mysql
 	docker run -p 8080:5000 --rm --network organization_network organization_py
