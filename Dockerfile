@@ -1,4 +1,4 @@
-FROM python:3.12-slim as base
+FROM python:3.9-slim as base
 WORKDIR /app
 
 ENV MYSQL_DATABASE_URI="mysql://root:password@mysql/organizationdb"

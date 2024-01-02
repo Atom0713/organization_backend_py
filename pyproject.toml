@@ -5,7 +5,7 @@ description = "Antaly Vandals organization dashboard backend"
 authors = ["Artem Sliusarenko <sliusarenko.artem@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.9"
 Flask = "^3.0.0"
 Flask-Cors = "3.0.10"
 flask-sqlalchemy = "^3.1.0"
